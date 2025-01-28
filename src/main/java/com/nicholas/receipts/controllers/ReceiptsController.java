@@ -12,5 +12,7 @@ public class ReceiptsController {
     public String index() {
         return "Hello this project works";
     }
+
+    
     
 }
