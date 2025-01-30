@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nicholas.receipts.models.Receipt;
 import com.nicholas.receipts.repository.ReceiptRepository;
+import com.nicholas.receipts.service.ReceiptService;
+import com.nicholas.receipts.service.ReceiptServiceImplV1;
 
 import jakarta.persistence.EntityManagerFactory;
 import lombok.AllArgsConstructor;
@@ -23,10 +25,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class ReceiptsController {
 
     
-    ReceiptRepository receiptRepository;
+    ReceiptService receiptService;
     
-    public ReceiptsController (ReceiptRepository receiptRepository){
-        this.receiptRepository = receiptRepository;
+    public ReceiptsController (ReceiptService receiptService){
+        this.receiptService = receiptService;
     }
 
     @GetMapping("/")
@@ -37,7 +39,8 @@ public class ReceiptsController {
     @PostMapping("/receipts")
     public Receipt postMethodName(@RequestBody Receipt entity) {
         
-        receiptRepository.save(entity);
+        receiptService.saveReceipt(entity);
+
 
         return entity;
     }
