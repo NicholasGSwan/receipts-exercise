@@ -4,9 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Set;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,17 +14,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table
 @Data
+@NoArgsConstructor
 public class Receipt {
     
     @Id
@@ -49,7 +44,14 @@ public class Receipt {
     
     private BigDecimal total;
     
-
+    public Receipt(Long id, String retailer, LocalDate date, LocalTime time, List<Item> items, BigDecimal total){
+        this.receiptId = id;
+        this.retailer = retailer;
+        this.date = date;
+        this.time = time;
+        this.items = items;
+        this.total = total;
+    }
 
 
 }
