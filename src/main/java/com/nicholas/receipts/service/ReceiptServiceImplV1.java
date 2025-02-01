@@ -42,6 +42,15 @@ public class ReceiptServiceImplV1 implements ReceiptService {
     }
 
     @Override
+    public Receipt getReceipt(String id) {
+        if(!id.matches("^[0-9]+")){
+            return null;
+        }else{
+            return getReceipt(Long.parseLong(id));
+        }
+    }
+
+    @Override
     public long calculatePoints(Receipt receipt){
         long pointTotal = 0L;
 
@@ -143,5 +152,6 @@ public class ReceiptServiceImplV1 implements ReceiptService {
 
         return points;
     }
+
 
 }
