@@ -44,8 +44,15 @@ public class ReceiptServiceImplV1 implements ReceiptService {
     @Override
     public long calculatePoints(Receipt receipt){
         long pointTotal = 0L;
-        
 
+        pointTotal += getRetailerNamePoints(receipt);
+        pointTotal += getRoundDollarAmountPoints(receipt);
+        pointTotal += getMultiplesOf25(receipt);
+        pointTotal += getPairsOfItemsPoints(receipt);
+        pointTotal += getItemsIfDescriptionIsMultOf3(receipt);
+        pointTotal += getPointsIfDayIsOdd(receipt);
+        pointTotal += getPointsIfBetween2and4pm(receipt);
+        
         return pointTotal;
     }
 

@@ -16,6 +16,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -29,19 +32,23 @@ public class Receipt {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long receiptId;
     @Column
+    @NotBlank
     private String retailer;
     @Column
     @JsonProperty("purchaseDate")
+    @NotNull
     private LocalDate date;
     @Column
     @JsonProperty("purchaseTime")
+    @NotNull
     private LocalTime time;
     @OneToMany(cascade=CascadeType.ALL, mappedBy = "receipt")
     @JsonManagedReference
     @JsonProperty("items")
+    @Size(min = 1)
     private List<Item> items;
     @Column
-    
+    @NotNull
     private BigDecimal total;
     
     public Receipt(Long id, String retailer, LocalDate date, LocalTime time, List<Item> items, BigDecimal total){
